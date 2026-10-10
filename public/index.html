@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Dubatt Assistant · Test page</title>
+<style>
+  :root { --bg:#eef1ef; --ink:#16201b; --muted:#5a6760; --line:#d6ddd9; --bar:#1b2420; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 15px/1.55 "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif; }
+  .bar { background: var(--bar); color: #e9efeb; padding: 14px 20px; font-weight: 700; letter-spacing: .04em; }
+  main { max-width: 680px; padding-inline: 20px; padding-block: 40px; margin: 0 auto; }
+  h1 { font-size: 26px; margin: 0 0 8px; }
+  p { color: var(--muted); margin: 0 0 14px; }
+  code { background: #fff; border: 1px solid var(--line); border-radius: 6px; padding: 2px 6px; font-size: 13px; overflow-wrap: anywhere; }
+  pre { background: #fff; border: 1px solid var(--line); border-radius: 8px; padding: 12px; overflow-x: auto; font-size: 13px; }
+</style>
+</head>
+<body>
+<div class="bar">DUBATT · assistant test page</div>
+<main>
+  <h1>Dubatt Website Assistant</h1>
+  <p>This private test page loads the same widget dubatt.com will use. Open the chat in the corner and run through each enquiry type.</p>
+  <p>To add it to dubatt.com, place this line just before <code>&lt;/body&gt;</code> on every page:</p>
+  <pre id="snippet"></pre>
+  <p>Service status: <code id="status">checking…</code></p>
+</main>
+<script>
+  document.getElementById("snippet").textContent = '<script src="' + location.origin + '/widget.js" defer><\/script>';
+  fetch("/api/health").then(r => r.json()).then(s => {
+    document.getElementById("status").textContent =
+      "AI answers " + (s.ai ? "on" : "off") + " · database " + (s.database ? "connected" : "not connected") + " · email " + (s.email ? "on" : "off");
+  }).catch(() => { document.getElementById("status").textContent = "unavailable"; });
+</script>
+<script src="/widget.js" data-open="true" defer></script>
+</body>
+</html>

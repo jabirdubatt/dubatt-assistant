@@ -1,0 +1,11 @@
+{
+  "name": "dubatt-assistant",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Website assistant for dubatt.com: guided enquiry flows, AI answers, enquiry routing by email.",
+  "engines": { "node": "22.x" },
+  "dependencies": {
+    "@supabase/supabase-js": "2.45.4"
+  }
+}
